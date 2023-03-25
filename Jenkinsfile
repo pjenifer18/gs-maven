@@ -5,7 +5,7 @@ pipeline {
             steps {
 				sh 'cd complete'
 				sh 'ls -l'
-                sh 'mvn -B -DskipTests clean package' 
+                sh 'cd complete && mvn -B -DskipTests clean package' 
             }
         }
     }
