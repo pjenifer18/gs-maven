@@ -1,5 +1,8 @@
 pipeline {
     agent any
+	environment {
+    TMPDIR = '/tmp'
+	}
     stages {
         stage('Build') { 
             steps {
