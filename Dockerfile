@@ -1,4 +1,4 @@
-FROM openjdk:8-slim
+FROM docker.io/library/openjdk:8-slim
 RUN apt-get update -y
 RUN apt-get install maven -y
 WORKDIR /opt
