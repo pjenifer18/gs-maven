@@ -17,9 +17,8 @@ pipeline {
 		}
 		stage('dockerbuild'){
 			steps{
-				withCredentials([aws(credentialsId: 'aws-cli-creds', region: 'ap-southeast-1')]) {
 					sh 'docker build -t applicationa .'
-                }
+
 			}
 		}
 		stage('dockerpush'){
@@ -34,6 +33,11 @@ pipeline {
 			// 	sh 'docker tag applicationa:latest 851584746386.dkr.ecr.ap-southeast-1.amazonaws.com/applicationa:latest'
 			// 	sh 'docker push 851584746386.dkr.ecr.ap-southeast-1.amazonaws.com/applicationa:latest'
 			// }
+		}
+		stage('deploy-dockercompose'){
+			steps{
+				sh 'docker-compose up -d'
+			}
 		}
 
     }
