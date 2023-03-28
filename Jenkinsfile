@@ -17,16 +17,16 @@ pipeline {
 		}
 		stage('dockerbuild'){
 			steps{
-					sh 'docker build -t applicationa .'
+					sh 'sudo docker build -t applicationa .'
 
 			}
 		}
 		stage('dockerpush'){
 			steps{
 			withCredentials([aws(credentialsId: 'aws-cli-creds', region: 'ap-southeast-1')]) {
-				sh 'aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin 314503617348.dkr.ecr.ap-southeast-1.amazonaws.com'
-                sh 'docker tag applicationa:latest 314503617348.dkr.ecr.ap-southeast-1.amazonaws.com/applicationa:latest'
-				sh 'docker push 314503617348.dkr.ecr.ap-southeast-1.amazonaws.com/applicationa:latest'
+				sh 'aws ecr get-login-password --region ap-southeast-1 | sudo docker login --username AWS --password-stdin 314503617348.dkr.ecr.ap-southeast-1.amazonaws.com'
+                sh 'sudo docker tag applicationa:latest 314503617348.dkr.ecr.ap-southeast-1.amazonaws.com/applicationa:latest'
+				sh 'sudo docker push 314503617348.dkr.ecr.ap-southeast-1.amazonaws.com/applicationa:latest'
                 }
 			}
 			// steps{
@@ -36,7 +36,7 @@ pipeline {
 		}
 		stage('deploy-dockercompose'){
 			steps{
-				sh 'docker-compose up -d'
+				sh 'sudo docker-compose up -d'
 			}
 		}
 
